@@ -1,11 +1,10 @@
 FROM ubuntu:14.04
-MAINTAINER Daniel Johansson <donnex@donnex.net>
 
 RUN apt-get update && \
     apt-get install -y wget unzip && \
     rm -rf /var/lib/apt/lists/*
 
-ENV PGWEB_VERSION 0.9.6
+ENV PGWEB_VERSION 0.11.7
 
 RUN \
   cd /tmp && \
@@ -20,4 +19,4 @@ WORKDIR /app
 
 EXPOSE 8080
 ENTRYPOINT ["/app/pgweb_linux_amd64"]
-CMD ["-s", "--bind=0.0.0.0", "--listen=8080"]
+CMD ["-s", "--bind=0.0.0.0", "--listen=8080", "$DATABASE_URL"]
